@@ -45,8 +45,14 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillStyle = '#000';
   ctx.font = '16px PT Mono';
 
-  ctx.fillText('Ура вы победили!', CLOUD_X + GAP + FONT_GAP, CLOUD_Y + GAP + TEXT_HEIGHT);
-  ctx.fillText('Список результатов: ', CLOUD_X + GAP + FONT_GAP, CLOUD_Y + GAP + TEXT_HEIGHT + FONT_GAP);
+  ctx.fillText('Ура вы победили!',
+      CLOUD_X + GAP + FONT_GAP,
+      CLOUD_Y + GAP + TEXT_HEIGHT
+  );
+  ctx.fillText('Список результатов: ',
+      CLOUD_X + GAP + FONT_GAP,
+      CLOUD_Y + GAP + TEXT_HEIGHT + FONT_GAP
+  );
 
   const maxTime = getMaxElement(times);
 
@@ -56,9 +62,21 @@ window.renderStatistics = function (ctx, names, times) {
     } else {
       ctx.fillStyle = 'hsl(240, ' + (Math.floor(Math.random() * 100) + 1) + '%, 50%)';
     }
-    ctx.fillRect(CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + GAP + TEXT_HEIGHT + FONT_GAP + TEXT_HEIGHT + GAP + getBarPosition(MAX_BAR_HEIGHT, getBarHeight(times[i], maxTime)), BAR_WIDTH, getBarHeight(times[i], maxTime));
+    const barX = CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i;
+    const barY = CLOUD_Y + GAP + TEXT_HEIGHT + FONT_GAP + TEXT_HEIGHT + GAP + getBarPosition(MAX_BAR_HEIGHT, getBarHeight(times[i], maxTime));
+
+    ctx.fillRect(barX, barY, BAR_WIDTH, getBarHeight(times[i], maxTime));
+
     ctx.fillStyle = '#000';
-    ctx.fillText(Math.round(times[i]), CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + GAP + TEXT_HEIGHT + FONT_GAP + TEXT_HEIGHT + getBarPosition(MAX_BAR_HEIGHT, getBarHeight(times[i], maxTime)));
-    ctx.fillText(names[i], CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + GAP + TEXT_HEIGHT + FONT_GAP + TEXT_HEIGHT + GAP + MAX_BAR_HEIGHT + FONT_GAP + GAP);
+
+    const playerPointsX = CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i;
+    const playerPointsY = CLOUD_Y + GAP + TEXT_HEIGHT + FONT_GAP + TEXT_HEIGHT + getBarPosition(MAX_BAR_HEIGHT, getBarHeight(times[i], maxTime));
+
+    ctx.fillText(Math.round(times[i]), playerPointsX, playerPointsY);
+
+    const playerNameX = CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i;
+    const playerNameY = CLOUD_Y + GAP + TEXT_HEIGHT + FONT_GAP + TEXT_HEIGHT + GAP + MAX_BAR_HEIGHT + FONT_GAP + GAP;
+
+    ctx.fillText(names[i], playerNameX, playerNameY);
   }
 };
