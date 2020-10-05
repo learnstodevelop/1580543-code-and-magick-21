@@ -19,7 +19,9 @@
   const setupClose = setup.querySelector('.setup-close');
   const userNameInput = setup.querySelector('.setup-user-name');
   const wizardCoat = setup.querySelector('.wizard-coat');
+  const wizardCoatInput = setup.querySelector('input[name=coat-color]');
   const wizardEyes = setup.querySelector('.wizard-eyes');
+  const wizardEyesInput = setup.querySelector('input[name=eyes-color]');
   const wizardFireballWrap = setup.querySelector('.setup-fireball-wrap');
   const wizardFireballColorInput = setup.querySelector('input[name=fireball-color]');
   const setupPlayer = setup.querySelector('.setup-player');
@@ -106,9 +108,11 @@
 
   const playerSettingsHandler = function (evt) {
     if (evt.target && evt.target.matches('.wizard-coat')) {
-      wizardCoat.style.fill = getRandomElement(COAT_COLORS);
+      wizardCoatInput.value = getRandomElement(COAT_COLORS);
+      wizardCoat.style.fill = wizardCoatInput.value;
     } else if (evt.target && evt.target.matches('.wizard-eyes')) {
-      wizardEyes.style.fill = getRandomElement(EYES_COLORS);
+      wizardEyesInput.value = getRandomElement(EYES_COLORS);
+      wizardEyes.style.fill = wizardEyesInput.value;
     } else if (evt.target && evt.target.matches('.setup-fireball')) {
       wizardFireballColorInput.value = getRandomElement(FIREBALL_COLORS);
       wizardFireballWrap.style.background = wizardFireballColorInput.value;
